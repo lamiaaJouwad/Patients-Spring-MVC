@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-    @Autowired
+    @Autowired //injection des dependances
     private PasswordEncoder passwordEncoder;
    @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
@@ -33,7 +33,7 @@ public class SecurityConfig {
        httpSecurity.formLogin().loginPage("/login").defaultSuccessUrl("/",true).permitAll();
        httpSecurity.rememberMe();
        httpSecurity.authorizeHttpRequests().requestMatchers("/webjars/**","/h2-console/**","/logout/*").permitAll();
-     //httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
+       //httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
        //httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         httpSecurity.exceptionHandling().accessDeniedPage("/notAuthorized");
        httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
